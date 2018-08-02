@@ -11,8 +11,7 @@ module.exports = {
       })
       .then(function (dataUser) {
         var token = jwt.sign({
-          data: dataUser.email,
-          nama: dataUser.username,
+          data: dataUser.username,
           id: dataUser._id
         }, 'kabbalah');
         res.json({
@@ -30,7 +29,7 @@ module.exports = {
 
   Login: function (req, res) {
     user.findOne({
-        email: req.body.email
+        username: req.body.username
       })
       .then(function (resultUser) {
         if (resultUser) {
@@ -38,12 +37,11 @@ module.exports = {
           let cek = bcrypt.compareSync(req.body.password, resultUser.password)
           if (cek) {
             var token = jwt.sign({
-              data: resultUser.email,
+              data: resultUser,
               id: resultUser._id,
-              nama: resultUser.username
             }, 'kabbalah');
 
-            console.log(resultUser, 'login')
+            console.log('loginsukses', resultUser, 'login')
             res.json({
               resultUser,
               token: token

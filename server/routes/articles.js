@@ -18,7 +18,7 @@ let {
 
 router
   .post('/article/add', addArticle)
-  .get('/article', authUser, showPost)
+  .get('/article', showPost)
   .get('/article/:id', singleArticle)
   .delete('/article/delete/:id', deletePost)
   .put('/article/update/:id', updateArticle)

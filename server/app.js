@@ -9,9 +9,10 @@ var usersRouter = require('./routes/users');
 var article = require('./routes/articles')
 
 var app = express();
+var mongoose = require('mongoose');
+
 var cors = require('cors')
 app.use(cors())
-var mongoose = require('mongoose');
 
 
 

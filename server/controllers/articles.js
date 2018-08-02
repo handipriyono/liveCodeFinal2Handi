@@ -22,11 +22,13 @@ module.exports = {
 
 
   addArticle: function (req, res) {
+    let decoded = jwt.verify(req.headers.tokenblog, 'kabbalah')
+    console.log(decoded)
     Blog.create({
         title: req.body.title,
         content: req.body.content,
         category: req.body.category,
-        author: req.body.author
+        author: decoded.id
       })
       .then(function (dataPost) {
         console.log(dataPost)

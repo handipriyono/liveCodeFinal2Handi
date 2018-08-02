@@ -1,11 +1,11 @@
 <template>
-  <div class="login">
+  <div class="register">
 
-<h2>logins</h2>
-<div class="loginlogin">
+<h2>Register</h2>
+<div class="registers">
   <div class="form-group">
     <label for="exampleInputEmail1">username</label>
-    <input v-model="username" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
+    <input v-model="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
 
@@ -13,14 +13,16 @@
     <label for="exampleInputPassword1">password</label>
     <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
-  <span @click="login" type="submit" class="btn btn-primary">Submit</span>
+  <button @click="register" type="submit" class="btn btn-primary">Submit</button>
 
 
   </div>
 </div>
 </template>
+
 <script>
 const axios = require('axios')
+
 export default {
   name: 'Login',
   data:function(){
@@ -31,25 +33,29 @@ export default {
   },
 
   methods:{
-    login(){
-      console.log('login')
+    register(){
+      console.log('register')
       axios({
         method:'post',
-        url:'http://localhost:3000/users/login',
+        url:'http://localhost:3000/users/register',
         data:{
           username:this.username,
           password:this.password
         }
       })
-      .then((datalogin)=>{
-        console.log(datalogin)
-        localStorage.setItem('tokenblog', datalogin.data.token)
-        console.log(JSON.stringify(datalogin))
+      .then((dataSignup)=>{
+        console.log(dataSignup)
+        localStorage.setItem('tokenblog', dataSignup.data.token)
+        console.log(JSON.stringify(dataSignup))
       })
       .catch(function(err){
         console.log(err)
       })
     }
+
+
+
+
 
   }
 }
@@ -57,7 +63,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.loginlogin{
+.registers{
   width:500px !important;
   margin:0px auto
 }
